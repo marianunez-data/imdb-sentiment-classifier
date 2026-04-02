@@ -1,0 +1,44 @@
+{
+  "champion": "lr_tuned_calibrated",
+  "n_test_samples": 23483,
+  "n_features": 7143,
+  "top_20_features": {
+    "bad": 0.172685,
+    "great": 0.130774,
+    "worst": 0.083583,
+    "even": 0.081022,
+    "no": 0.080213,
+    "best": 0.068736,
+    "the best": 0.067095,
+    "well": 0.065941,
+    "nothing": 0.062423,
+    "boring": 0.056827,
+    "excellent": 0.056761,
+    "waste": 0.056134,
+    "just": 0.055867,
+    "love": 0.055473,
+    "awful": 0.054397,
+    "the worst": 0.053322,
+    "don": 0.051292,
+    "plot": 0.051147,
+    "was": 0.049707,
+    "this is": 0.048726
+  },
+  "examples": {
+    "strong_positive": {
+      "index": 19233,
+      "prediction": 1.0,
+      "actual": 1
+    },
+    "strong_negative": {
+      "index": 6859,
+      "prediction": 0.0,
+      "actual": 0
+    },
+    "borderline": {
+      "index": 16928,
+      "prediction": 0.5,
+      "actual": 0
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "dummy": {
+    "display_name": "Dummy (stratified)",
+    "cv_f1": 0.4995,
+    "cv_auc": 0.4999,
+    "cv_precision": 0.4992,
+    "cv_recall": 0.4997
+  },
+  "logistic_regression": {
+    "display_name": "Logistic Regression",
+    "cv_f1": 0.8915,
+    "cv_auc": 0.9578,
+    "cv_precision": 0.8845,
+    "cv_recall": 0.8987
+  },
+  "lr_spacy": {
+    "display_name": "LR + spaCy",
+    "cv_f1": 0.8805,
+    "cv_auc": 0.9494,
+    "cv_precision": 0.8712,
+    "cv_recall": 0.8901
+  },
+  "lgbm": {
+    "display_name": "LGBM (default)",
+    "cv_f1": 0.8768,
+    "cv_auc": 0.9488,
+    "cv_precision": 0.8707,
+    "cv_recall": 0.883
+  }
+}

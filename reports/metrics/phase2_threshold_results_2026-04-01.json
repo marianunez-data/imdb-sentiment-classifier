@@ -1,0 +1,8 @@
+{
+  "lr_tuned_calibrated": {
+    "optimal_threshold": 0.49,
+    "default_f1": 0.8932,
+    "optimal_f1": 0.8934,
+    "improvement": 0.0002
+  }
+}

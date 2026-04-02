@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-04-02T14:30:36.070264+00:00",
+  "n_reference": 11741,
+  "n_current": 11742,
+  "drift_detected": false,
+  "drift_score": 0.025239,
+  "mean_prob_reference": 0.486901,
+  "mean_prob_current": 0.51214
+}

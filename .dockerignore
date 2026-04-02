@@ -1,0 +1,11 @@
+.venv/
+notebooks/
+data/
+mlruns/
+reports/
+tests/
+.git/
+__pycache__/
+*.ipynb
+.coverage
+models/distilbert-finetuned/

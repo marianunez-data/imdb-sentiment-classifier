@@ -1,0 +1,10 @@
+{
+  "model": "distilbert-base-uncased",
+  "lora_r": 8,
+  "trainable_params": 739586,
+  "total_params": 67694596,
+  "eval_f1": 0.8909,
+  "eval_accuracy": 0.8906,
+  "n_train_samples": 22569,
+  "date": "2026-04-01"
+}

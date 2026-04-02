@@ -1,0 +1,5 @@
+{
+  "brier_score": 0.0795,
+  "calibration_needed": false,
+  "sample_size": 1200
+}

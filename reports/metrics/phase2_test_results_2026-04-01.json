@@ -1,0 +1,174 @@
+{
+  "dummy": {
+    "f1": 0.4998,
+    "f1_ci": [
+      0.4922,
+      0.5073
+    ],
+    "roc_auc": 0.4999,
+    "roc_auc_ci": [
+      0.4934,
+      0.5057
+    ],
+    "precision": 0.498,
+    "recall": 0.5016,
+    "ms_per_prediction": 0.45
+  },
+  "logistic_regression": {
+    "f1": 0.8954,
+    "f1_ci": [
+      0.8908,
+      0.8992
+    ],
+    "roc_auc": 0.9599,
+    "roc_auc_ci": [
+      0.9577,
+      0.9621
+    ],
+    "precision": 0.8902,
+    "recall": 0.9007,
+    "ms_per_prediction": 0.34
+  },
+  "lgbm": {
+    "f1": 0.8792,
+    "f1_ci": [
+      0.8745,
+      0.8834
+    ],
+    "roc_auc": 0.9517,
+    "roc_auc_ci": [
+      0.949,
+      0.9542
+    ],
+    "precision": 0.8716,
+    "recall": 0.8869,
+    "ms_per_prediction": 8.98
+  },
+  "lgbm_tuned": {
+    "f1": 0.8763,
+    "f1_ci": [
+      0.8715,
+      0.8807
+    ],
+    "roc_auc": 0.9483,
+    "roc_auc_ci": [
+      0.9457,
+      0.9508
+    ],
+    "precision": 0.8697,
+    "recall": 0.883,
+    "ms_per_prediction": 8.17
+  },
+  "lr_tuned": {
+    "f1": 0.8948,
+    "f1_ci": [
+      0.8907,
+      0.8989
+    ],
+    "roc_auc": 0.9605,
+    "roc_auc_ci": [
+      0.9583,
+      0.9627
+    ],
+    "precision": 0.8914,
+    "recall": 0.8983,
+    "ms_per_prediction": 0.31
+  },
+  "logistic_regression_calibrated": {
+    "f1": 0.8934,
+    "f1_ci": [
+      0.8891,
+      0.8973
+    ],
+    "roc_auc": 0.9592,
+    "roc_auc_ci": [
+      0.9569,
+      0.9614
+    ],
+    "precision": 0.889,
+    "recall": 0.8979,
+    "ms_per_prediction": 3.02
+  },
+  "lr_tuned_calibrated": {
+    "f1": 0.8948,
+    "f1_ci": [
+      0.8906,
+      0.8988
+    ],
+    "roc_auc": 0.9605,
+    "roc_auc_ci": [
+      0.9583,
+      0.9627
+    ],
+    "precision": 0.8906,
+    "recall": 0.8991,
+    "ms_per_prediction": 2.89
+  },
+  "lgbm_calibrated": {
+    "f1": 0.8828,
+    "f1_ci": [
+      0.8782,
+      0.887
+    ],
+    "roc_auc": 0.9542,
+    "roc_auc_ci": [
+      0.9517,
+      0.9566
+    ],
+    "precision": 0.875,
+    "recall": 0.8907,
+    "ms_per_prediction": 33.65
+  },
+  "distilbert_lora": {
+    "f1": 0.8796,
+    "f1_ci": [
+      0.8753,
+      0.8841
+    ],
+    "roc_auc": 0.9523,
+    "roc_auc_ci": [
+      0.9498,
+      0.9547
+    ],
+    "precision": 0.8724,
+    "recall": 0.887,
+    "ms_per_prediction": 24.93
+  },
+  "champion": "lr_tuned_calibrated",
+  "mcnemar_lr_tuned_calibrated_vs_dummy": {
+    "chi2": 7325.95,
+    "p_value": 0.0,
+    "significant": true
+  },
+  "mcnemar_lr_tuned_calibrated_vs_logistic_regression": {
+    "chi2": 0.38,
+    "p_value": 0.540291,
+    "significant": false
+  },
+  "mcnemar_lr_tuned_calibrated_vs_lr_tuned": {
+    "chi2": 0.01,
+    "p_value": 0.940911,
+    "significant": false
+  },
+  "mcnemar_lr_tuned_calibrated_vs_lgbm_calibrated": {
+    "chi2": 49.53,
+    "p_value": 0.0,
+    "significant": true
+  },
+  "mcnemar_lr_tuned_calibrated_vs_distilbert_lora": {
+    "chi2": 44.28,
+    "p_value": 0.0,
+    "significant": true
+  },
+  "inference_times": {
+    "dummy": 0.45,
+    "logistic_regression": 0.34,
+    "lgbm": 8.98,
+    "lgbm_tuned": 8.17,
+    "lr_tuned": 0.31,
+    "logistic_regression_calibrated": 3.02,
+    "lr_tuned_calibrated": 2.89,
+    "lgbm_calibrated": 33.65,
+    "distilbert_lora": 24.93
+  }
+}

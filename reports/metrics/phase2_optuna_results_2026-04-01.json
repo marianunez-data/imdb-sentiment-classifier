@@ -1,0 +1,23 @@
+{
+  "lr_tuned": {
+    "best_params": {
+      "C": 2.0047127039751875,
+      "penalty": "l2"
+    },
+    "best_cv_f1": 0.8927018492420885,
+    "trials_completed": 19
+  },
+  "lgbm_tuned": {
+    "best_params": {
+      "n_estimators": 437,
+      "learning_rate": 0.22648248189516848,
+      "num_leaves": 50,
+      "max_depth": 8,
+      "min_child_samples": 19,
+      "subsample": 0.5779972601681014,
+      "colsample_bytree": 0.5290418060840998
+    },
+    "best_cv_f1": 0.8701701365998306,
+    "trials_completed": 8
+  }
+}

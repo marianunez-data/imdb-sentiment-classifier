@@ -1,0 +1,23 @@
+{
+  "brier_scores_uncalibrated": {
+    "logistic_regression": 0.0884,
+    "lr_tuned": 0.082411,
+    "lgbm": 0.089463,
+    "lgbm_tuned": 0.094676
+  },
+  "brier_scores_calibrated": {
+    "logistic_regression_calibrated": 0.080776,
+    "lr_tuned_calibrated": 0.078885,
+    "lgbm_calibrated": 0.087367
+  },
+  "calibration_methods": {
+    "logistic_regression_calibrated": "sigmoid",
+    "lr_tuned_calibrated": "sigmoid",
+    "lgbm_calibrated": "isotonic"
+  },
+  "calibration_applied": [
+    "logistic_regression_calibrated",
+    "lr_tuned_calibrated",
+    "lgbm_calibrated"
+  ]
+}

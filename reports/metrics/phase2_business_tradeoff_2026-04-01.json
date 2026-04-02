@@ -1,0 +1,13 @@
+{
+  "champion": "lr_tuned_calibrated",
+  "champion_f1": 0.8948,
+  "bert_f1": 0.8796,
+  "f1_difference": -0.0152,
+  "champion_ms": 2.89,
+  "bert_ms": 24.93,
+  "speed_ratio": 8.6,
+  "champion_brier": 0.0789,
+  "bert_brier": 0.0795,
+  "champion_monthly_cost": "$50",
+  "bert_monthly_cost": "$500"
+}
