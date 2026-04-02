@@ -1,7 +1,10 @@
 # IMDB Sentiment Classifier
 ![Tests](https://github.com/marianunez-data/imdb-sentiment-classifier/actions/workflows/tests.yml/badge.svg)
+[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://imdb-sentiment-mcgn.streamlit.app/)
 
 **Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression (LR), LightGBM, and DistilBERT with full MLOps pipeline.
+
+**[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)**
 
 ## Results
 
@@ -16,28 +19,53 @@
 
 ## Architecture
 
-```
-data/imdb_reviews.tsv
-    │
-    ├── src/data/loader.py ──→ src/data/cleaner.py ──→ src/data/validator.py
-    │                                                    (Great Expectations)
-    │
-    ├── notebooks/01_eda_exploration.ipynb          ← Data story + design decisions
-    │
-    ├── notebooks/02_modeling_evaluation.ipynb      ← Full modeling pipeline
-    │       │
-    │       ├── Baselines (Dummy, LR, LR+spaCy, LGBM)
-    │       ├── Optuna tuning (LR: C=2.0, L2 | LGBM: 8 trials)
-    │       ├── Calibration (sigmoid for LR, isotonic for LGBM)
-    │       ├── Threshold optimization (0.49 ≈ 0.50, negligible)
-    │       ├── DistilBERT + LoRA ( F1=0.8909)
-    │       ├── Test evaluation (bootstrap CIs + McNemar's test)
-    │       └── SHAP explainability (global + local)
-    │
-    ├── app/main.py                                ← FastAPI + SHAP + confidence routing
-    ├── streamlit_app/app.py                       ← Interactive dashboard
-    ├── monitoring/drift_report.py                 ← Evidently AI drift detection
-    └── Dockerfile + docker-compose.yml            ← Container deployment
+```mermaid
+graph TD
+    A["Raw Data | imdb_reviews.tsv"] --> B["Data Pipeline"]
+    
+    subgraph Pipeline["Data Pipeline"]
+        B --> B1["loader.py"]
+        B1 --> B2["cleaner.py"]
+        B2 --> B3["validator.py | Great Expectations 5/5"]
+    end
+    
+    B3 --> C["EDA Notebook | 11 analyses, 8 design decisions"]
+    B3 --> D["Modeling Notebook"]
+    
+    subgraph Models["Model Training and Evaluation"]
+        D --> D1["Baselines | Dummy, LR, LR+spaCy, LGBM"]
+        D1 --> D2["Optuna Tuning | LR C=2.0, LGBM 8 trials"]
+        D2 --> D3["Calibration | Sigmoid LR, Isotonic LGBM"]
+        D3 --> D4["Threshold Optimization | 0.49 = 0.50"]
+        D3 --> D5["DistilBERT + LoRA | F1=0.8909"]
+        D4 --> D6["Test Evaluation | Bootstrap CIs + McNemar"]
+        D5 --> D6
+        D6 --> D7["SHAP Explainability | Global + Local"]
+    end
+    
+    D7 --> E["Champion: LR Tuned Calibrated | F1=0.8948"]
+    
+    E --> F["FastAPI | /predict + /health"]
+    E --> G["Streamlit Dashboard | 4 tabs"]
+    E --> H["Drift Monitor | Evidently AI"]
+    
+    F --> I["Docker Container"]
+    I --> J["AWS Lambda"]
+    
+    subgraph Tracking["Experiment Tracking"]
+        K["MLflow | 24 runs logged"]
+    end
+    
+    D1 -.-> K
+    D2 -.-> K
+    D3 -.-> K
+    D6 -.-> K
+    H -.-> K
+
+    style E fill:#1f77b4,stroke:#fff,color:#fff
+    style F fill:#2ca02c,stroke:#fff,color:#fff
+    style G fill:#d62728,stroke:#fff,color:#fff
+    style H fill:#ff7f0e,stroke:#fff,color:#fff
 ```
 
 ## Key Findings
