@@ -1,6 +1,7 @@
 # IMDB Sentiment Classifier
+![Tests](https://github.com/marianunez-data/imdb-sentiment-classifier/actions/workflows/tests.yml/badge.svg)
 
-**Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression(LR), LightGBM, and DistilBERT with full MLOps pipeline.
+**Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression (LR), LightGBM, and DistilBERT with full MLOps pipeline.
 
 ## Results
 
@@ -29,7 +30,7 @@ data/imdb_reviews.tsv
     │       ├── Optuna tuning (LR: C=2.0, L2 | LGBM: 8 trials)
     │       ├── Calibration (sigmoid for LR, isotonic for LGBM)
     │       ├── Threshold optimization (0.49 ≈ 0.50, negligible)
-    │       ├── DistilBERT + LoRA (1.09% params, F1=0.8909)
+    │       ├── DistilBERT + LoRA ( F1=0.8909)
     │       ├── Test evaluation (bootstrap CIs + McNemar's test)
     │       └── SHAP explainability (global + local)
     │
@@ -44,7 +45,7 @@ data/imdb_reviews.tsv
 - **Linear separability**: LR with TF-IDF bigrams matches DistilBERT (F1=0.8948 vs 0.8796), confirming sentiment in this dataset is linearly separable in bigram space.
 - **Hyperparameter tuning**: Optuna found C=2.0 (vs default 1.0) for +0.0012 F1, minimal gain. LGBM tuning produced worse results with only 8 trials (insufficient for 7-dimensional search space).
 - **Calibration matters**: McNemar's test shows LR default and LR calibrated make identical predictions (p=0.54). The champion wins on probability quality (Brier 0.0789 vs 0.0884), critical for confidence-based routing.
-- **BERT truncation impact**: 41.4% of reviews truncated at max_length=256 tokens. Even with contextual understanding, BERT could not overcome this data loss.
+- **BERT truncation impact**: 41.4% of reviews truncated at max_length=256 tokens.
 - **Estimated production cost**: LR at ~$50/month (CPU) vs BERT at ~$500/month (GPU), 10x cost for lower F1. Estimates based on AWS on-demand pricing, US East, April 2026.
 
 ## Features
@@ -81,6 +82,20 @@ Response:
 python -m monitoring.drift_report
 ```
 Splits test set 50/50 to simulate reference vs production data. Generates Evidently HTML report + JSON summary with drift detection status.
+
+### Experiment Tracking (MLflow)
+All experiments logged to MLflow with full reproducibility:
+- Baseline CV results (F1, AUC, precision, recall per model)
+- Optuna hyperparameter search (19 LR trials, 8 LGBM trials)
+- Calibration comparisons (sigmoid vs isotonic, Brier scores)
+- Test evaluation metrics with bootstrap CIs
+- Drift monitoring results
+```bash
+mlflow ui --port 5000
+# Open http://localhost:5000 to explore experiments
+```
+
+![MLflow Experiment Tracking](docs/mlflow_charts.png)
 
 ## Quick Start
 
@@ -137,7 +152,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: pytest tests/ -v
+      - run: pytest tests/test_config.py -v
 ```
 
 ### Retrain Models
@@ -186,7 +201,7 @@ python -m src.models.explain         # SHAP analysis
 | Category       | Tools                                                    |
 | -------------- | -------------------------------------------------------- |
 | ML             | scikit-learn, LightGBM, DistilBERT + LoRA (PEFT), Optuna |
-| Explainability | SHAP (LinearExplainer)                                   |
+| Explainability | SHAP                                                     |
 | API            | FastAPI, Pydantic, Mangum (AWS Lambda)                   |
 | Monitoring     | Evidently AI, MLflow                                     |
 | Dashboard      | Streamlit, Plotly                                        |
@@ -198,4 +213,3 @@ python -m src.models.explain         # SHAP analysis
 **Maria Camila Gonzalez Nuñez**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-marianunez--data-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/marianunez-data)
-[![GitHub](https://img.shields.io/badge/GitHub-marianunez--data-333?style=flat&logo=github)](https://github.com/marianunez-data)
