@@ -1,6 +1,8 @@
 # IMDB Sentiment Classifier
 ![Tests](https://github.com/marianunez-data/imdb-sentiment-classifier/actions/workflows/tests.yml/badge.svg)
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://imdb-sentiment-mcgn.streamlit.app/)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 **[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)**
 
 **Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression (LR), LightGBM, and DistilBERT with full MLOps pipeline.
@@ -18,54 +20,38 @@
 **Champion**: LR Tuned Calibrated: selected for calibrated probability quality (Brier=0.0789), not just F1. Enables confidence-based routing: auto-classify (>85%), human review (60-85%), escalate (<60%).
 
 ## Architecture
-
 ```mermaid
-graph TD
-    A["Raw Data | imdb_reviews.tsv"] --> B["Data Pipeline"]
+flowchart TD
+    A[Raw Data\nimdb_reviews.tsv] --> B[loader.py]
+    B --> C[cleaner.py]
+    C --> D[validator.py\nGreat Expectations]
 
-    subgraph Pipeline["Data Pipeline"]
-        B --> B1["loader.py"]
-        B1 --> B2["cleaner.py"]
-        B2 --> B3["validator.py | Great Expectations 5/5"]
-    end
+    D --> E[EDA Notebook\n11 analyses]
+    D --> F[Modeling Notebook]
 
-    B3 --> C["EDA Notebook | 11 analyses, 8 design decisions"]
-    B3 --> D["Modeling Notebook"]
+    F --> G[Baselines\nDummy, LR, LR+spaCy, LGBM]
+    G --> H[Optuna Tuning\nLR: C=2.0, L2]
+    H --> I[Calibration\nSigmoid LR, Isotonic LGBM]
+    I --> J[Threshold Optimization\n0.49 ≈ 0.50]
+    I --> K[DistilBERT + LoRA\nF1=0.8909]
+    J --> L[Test Evaluation\nBootstrap CIs + McNemar]
+    K --> L
+    L --> M[SHAP Explainability\nGlobal + Local]
 
-    subgraph Models["Model Training and Evaluation"]
-        D --> D1["Baselines | Dummy, LR, LR+spaCy, LGBM"]
-        D1 --> D2["Optuna Tuning | LR C=2.0, LGBM 8 trials"]
-        D2 --> D3["Calibration | Sigmoid LR, Isotonic LGBM"]
-        D3 --> D4["Threshold Optimization | 0.49 = 0.50"]
-        D3 --> D5["DistilBERT + LoRA | F1=0.8909"]
-        D4 --> D6["Test Evaluation | Bootstrap CIs + McNemar"]
-        D5 --> D6
-        D6 --> D7["SHAP Explainability | Global + Local"]
-    end
+    M --> N[Champion\nLR Tuned Calibrated]:::champion
 
-    D7 --> E["Champion: LR Tuned Calibrated | F1=0.8948"]
+    N --> O[FastAPI\n/predict + /health]:::deploy
+    N --> P[Streamlit Dashboard\n4 tabs]:::deploy
+    N --> Q[Drift Monitor\nEvidently AI]:::deploy
 
-    E --> F["FastAPI | /predict + /health"]
-    E --> G["Streamlit Dashboard | 4 tabs"]
-    E --> H["Drift Monitor | Evidently AI"]
+    O --> R[Docker Container]
+    R --> S[Hugging Face Spaces]
 
-    F --> I["Docker Container"]
-    I --> J["Hugging Face Spaces"]
+    T[MLflow\n24 runs logged]:::tracking
 
-    subgraph Tracking["Experiment Tracking"]
-        K["MLflow | 24 runs logged"]
-    end
-
-    D1 -.-> K
-    D2 -.-> K
-    D3 -.-> K
-    D6 -.-> K
-    H -.-> K
-
-    style E fill:#1f77b4,stroke:#fff,color:#fff
-    style F fill:#2ca02c,stroke:#fff,color:#fff
-    style G fill:#d62728,stroke:#fff,color:#fff
-    style H fill:#ff7f0e,stroke:#fff,color:#fff
+    classDef champion fill:#2196F3,color:#fff
+    classDef deploy fill:#4CAF50,color:#fff
+    classDef tracking fill:#FF9800,color:#fff
 ```
 
 ## Key Findings
