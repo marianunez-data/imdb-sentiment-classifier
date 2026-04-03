@@ -1030,13 +1030,13 @@ Plotly.newPlot('chart-shap', [{
 
 // Routing Distribution
 const routingX = [];
-for (let i = 0; i <= 100; i++) routingX.push(i/100);
+for (let i = 0; i <= 50; i++) routingX.push(i/50);
 const routingY = routingX.map(x => {
-  if (x < 0.15) return 80 + Math.random()*40;
-  if (x < 0.40) return 10 + Math.random()*15;
-  if (x < 0.60) return 5 + Math.random()*8;
-  if (x < 0.85) return 10 + Math.random()*15;
-  return 80 + Math.random()*40;
+  if (x < 0.15) return Math.round(350 + Math.random()*150);
+  if (x < 0.40) return Math.round(100 + Math.random()*80);
+  if (x < 0.60) return Math.round(40 + Math.random()*50);
+  if (x < 0.85) return Math.round(100 + Math.random()*80);
+  return Math.round(350 + Math.random()*150);
 });
 const routingColors = routingX.map(x => {
   if (x > 0.85 || x < 0.15) return '#10b981';
@@ -1049,11 +1049,13 @@ Plotly.newPlot('chart-routing', [{
   x: routingX, y: routingY,
   marker: { color: routingColors },
 }], {
-  ...plotLayout,
-  margin: { l: 50, r: 20, t: 10, b: 50 },
-  xaxis: { ...plotLayout.xaxis, title: { text: 'Predicted Probability', font: { size: 11 } }, range: [0, 1] },
-  yaxis: { ...plotLayout.yaxis, title: { text: 'Count', font: { size: 11 } } },
-  height: 250,
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { family: 'DM Sans', color: '#94a3b8', size: 11 },
+  margin: { l: 60, r: 20, t: 20, b: 50 },
+  xaxis: { gridcolor: '#1e293b', zerolinecolor: '#1e293b', title: { text: 'Predicted Probability', font: { size: 11 } }, range: [0, 1] },
+  yaxis: { gridcolor: '#1e293b', title: { text: 'Count', font: { size: 11 } }, tickvals: [0, 100, 200, 300, 400, 500], ticktext: ['0', '100', '200', '300', '400', '500'], range: [0, 550] },
+  height: 320,
   shapes: [
     { type: 'line', x0: 0.15, x1: 0.15, y0: 0, y1: 1, yref: 'paper', line: { color: '#64748b', width: 1, dash: 'dash' } },
     { type: 'line', x0: 0.40, x1: 0.40, y0: 0, y1: 1, yref: 'paper', line: { color: '#64748b', width: 1, dash: 'dash' } },
