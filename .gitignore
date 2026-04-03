@@ -37,3 +37,4 @@ htmlcov/
 # Temp files
 *.md.bak
 .env
+hf-space/

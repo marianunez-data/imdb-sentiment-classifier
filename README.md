@@ -1,10 +1,10 @@
 # IMDB Sentiment Classifier
 ![Tests](https://github.com/marianunez-data/imdb-sentiment-classifier/actions/workflows/tests.yml/badge.svg)
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://imdb-sentiment-mcgn.streamlit.app/)
+**[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)**
 
 **Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression (LR), LightGBM, and DistilBERT with full MLOps pipeline.
 
-**[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)**
 
 ## Results
 
@@ -22,16 +22,16 @@
 ```mermaid
 graph TD
     A["Raw Data | imdb_reviews.tsv"] --> B["Data Pipeline"]
-    
+
     subgraph Pipeline["Data Pipeline"]
         B --> B1["loader.py"]
         B1 --> B2["cleaner.py"]
         B2 --> B3["validator.py | Great Expectations 5/5"]
     end
-    
+
     B3 --> C["EDA Notebook | 11 analyses, 8 design decisions"]
     B3 --> D["Modeling Notebook"]
-    
+
     subgraph Models["Model Training and Evaluation"]
         D --> D1["Baselines | Dummy, LR, LR+spaCy, LGBM"]
         D1 --> D2["Optuna Tuning | LR C=2.0, LGBM 8 trials"]
@@ -42,20 +42,20 @@ graph TD
         D5 --> D6
         D6 --> D7["SHAP Explainability | Global + Local"]
     end
-    
+
     D7 --> E["Champion: LR Tuned Calibrated | F1=0.8948"]
-    
+
     E --> F["FastAPI | /predict + /health"]
     E --> G["Streamlit Dashboard | 4 tabs"]
     E --> H["Drift Monitor | Evidently AI"]
-    
+
     F --> I["Docker Container"]
-    I --> J["AWS Lambda"]
-    
+    I --> J["Hugging Face Spaces"]
+
     subgraph Tracking["Experiment Tracking"]
         K["MLflow | 24 runs logged"]
     end
-    
+
     D1 -.-> K
     D2 -.-> K
     D3 -.-> K
@@ -80,7 +80,12 @@ graph TD
 
 ### FastAPI Endpoint
 ```bash
-# Predict with SHAP explanations + confidence routing
+# Live API (Hugging Face Spaces)
+curl -X POST https://marianunez-data-imdb-sentiment-classifier.hf.space/predict \
+  -H "Content-Type: application/json" \
+  -d '{"review": "This movie was absolutely amazing, best film ever"}'
+
+# Local
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
   -d '{"review": "This movie was absolutely amazing, best film ever"}'
@@ -226,15 +231,15 @@ python -m src.models.explain         # SHAP analysis
 
 ## Tech Stack
 
-| Category       | Tools                                                    |
-| -------------- | -------------------------------------------------------- |
-| ML             | scikit-learn, LightGBM, DistilBERT + LoRA (PEFT), Optuna |
-| Explainability | SHAP                                                     |
-| API            | FastAPI, Pydantic, Mangum (AWS Lambda)                   |
-| Monitoring     | Evidently AI, MLflow                                     |
-| Dashboard      | Streamlit, Plotly                                        |
-| Infrastructure | Docker, pytest, GitHub Actions                           |
-| Data Quality   | Great Expectations                                       |
+| Category       | Tools                                                         |
+| -------------- | ------------------------------------------------------------- |
+| ML             | scikit-learn, LightGBM, DistilBERT + LoRA (PEFT), Optuna      |
+| Explainability | SHAP                                                          |
+| API            | FastAPI, Pydantic, Hugging Face Spaces, Mangum (Lambda-ready) |
+| Monitoring     | Evidently AI, MLflow                                          |
+| Dashboard      | Streamlit, Plotly                                             |
+| Infrastructure | Docker, pytest, GitHub Actions                                |
+| Data Quality   | Great Expectations                                            |
 
 ## Author
 
