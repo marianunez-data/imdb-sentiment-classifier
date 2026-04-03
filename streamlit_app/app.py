@@ -362,6 +362,8 @@ with tab1:
             "the storyline kept me on the edge of my seat the entire time."
         ),
     )
+    st.caption("This model was trained on English movie reviews. Non-English input may produce unreliable results.")
+
 
     if st.button("Analyze", type="primary", use_container_width=True):
         if not review_input.strip():
