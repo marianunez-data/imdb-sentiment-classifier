@@ -20,52 +20,31 @@
 ## Architecture
 
 ```mermaid
-graph TD
-    A["Raw Data | imdb_reviews.tsv"] --> B["Data Pipeline"]
+flowchart TD
+    A["Raw Data | imdb_reviews.tsv"] --> B["loader.py"]
+    B --> C["cleaner.py"]
+    C --> D["validator.py | Great Expectations"]
+    D --> E["EDA Notebook | 11 analyses"]
+    D --> F["Modeling Notebook"]
+    F --> G["Baselines | Dummy, LR, LR+spaCy, LGBM"]
+    G --> H["Optuna Tuning | LR C=2.0, L2"]
+    H --> I["Calibration | Sigmoid LR, Isotonic LGBM"]
+    I --> J["Threshold Optimization | 0.49 = 0.50"]
+    I --> K["DistilBERT + LoRA | F1=0.8909"]
+    J --> L["Test Evaluation | Bootstrap CIs + McNemar"]
+    K --> L
+    L --> M["SHAP Explainability | Global + Local"]
+    M --> N["Champion | LR Tuned Calibrated"]:::champion
+    N --> O["FastAPI | /predict + /health"]:::deploy
+    N --> P["Streamlit Dashboard | 4 tabs"]:::deploy
+    N --> Q["Drift Monitor | Evidently AI"]:::deploy
+    O --> R["Docker Container"]
+    R --> S["Hugging Face Spaces"]
+    T["MLflow | 24 runs logged"]:::tracking
 
-    subgraph Pipeline["Data Pipeline"]
-        B --> B1["loader.py"]
-        B1 --> B2["cleaner.py"]
-        B2 --> B3["validator.py | Great Expectations 5/5"]
-    end
-
-    B3 --> C["EDA Notebook | 11 analyses, 8 design decisions"]
-    B3 --> D["Modeling Notebook"]
-
-    subgraph Models["Model Training and Evaluation"]
-        D --> D1["Baselines | Dummy, LR, LR+spaCy, LGBM"]
-        D1 --> D2["Optuna Tuning | LR C=2.0, LGBM 8 trials"]
-        D2 --> D3["Calibration | Sigmoid LR, Isotonic LGBM"]
-        D3 --> D4["Threshold Optimization | 0.49 = 0.50"]
-        D3 --> D5["DistilBERT + LoRA | F1=0.8909"]
-        D4 --> D6["Test Evaluation | Bootstrap CIs + McNemar"]
-        D5 --> D6
-        D6 --> D7["SHAP Explainability | Global + Local"]
-    end
-
-    D7 --> E["Champion: LR Tuned Calibrated | F1=0.8948"]
-
-    E --> F["FastAPI | /predict + /health"]
-    E --> G["Streamlit Dashboard | 4 tabs"]
-    E --> H["Drift Monitor | Evidently AI"]
-
-    F --> I["Docker Container"]
-    I --> J["Hugging Face Spaces"]
-
-    subgraph Tracking["Experiment Tracking"]
-        K["MLflow | 24 runs logged"]
-    end
-
-    D1 -.-> K
-    D2 -.-> K
-    D3 -.-> K
-    D6 -.-> K
-    H -.-> K
-
-    style E fill:#1f77b4,stroke:#fff,color:#fff
-    style F fill:#2ca02c,stroke:#fff,color:#fff
-    style G fill:#d62728,stroke:#fff,color:#fff
-    style H fill:#ff7f0e,stroke:#fff,color:#fff
+    classDef champion fill:#2196F3,color:#fff
+    classDef deploy fill:#4CAF50,color:#fff
+    classDef tracking fill:#FF9800,color:#fff
 ```
 
 ## Key Findings
