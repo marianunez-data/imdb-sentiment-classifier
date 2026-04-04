@@ -3,7 +3,7 @@
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://imdb-sentiment-mcgn.streamlit.app/)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-**[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)** | **[Executive Report](https://htmlpreview.github.io/?https://github.com/marianunez-data/imdb-sentiment-classifier/blob/main/docs/business_report.html)**
+**[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)** | **[Executive Report](https://marianunez-data.github.io/business_report.html)**
 
 **Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression (LR), LightGBM, and DistilBERT with full MLOps pipeline.
 
