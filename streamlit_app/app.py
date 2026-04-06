@@ -294,7 +294,7 @@ with st.sidebar:
     st.markdown(
         "[API Docs](http://localhost:8000/docs)"
         " | "
-        "[GitHub](https://github.com/marianunez-data/imdb-sentiment-classifier)"
+        "[GitHub](https://github.com/marianunez-data/nlp-sentiment-intelligence)"
     )
 
 
@@ -314,7 +314,7 @@ FOOTER_HTML = (
     "<strong>Maria Camila Gonzalez Nu\u00f1ez</strong><br>"
     '<a href="https://www.linkedin.com/in/marianunez-data" '
     'target="_blank" style="color: #1f77b4;">LinkedIn</a> | '
-    '<a href="https://github.com/marianunez-data/imdb-sentiment-classifier" '
+    '<a href="https://github.com/marianunez-data/nlp-sentiment-intelligence" '
     'target="_blank" style="color: #1f77b4;">GitHub</a><br>'
     '<span style="color: #666;">Built with Python &middot; '
     "scikit-learn &middot; FastAPI &middot; Streamlit &middot; "

@@ -2,7 +2,7 @@ project:
   name: "nlp-sentiment-intelligence"
   version: "2.0.0"
   random_seed: 42
-  description: "Production-grade binary sentiment classifier for IMDB movie reviews"
+  description: "Production-grade NLP sentiment classification pipeline"
 
 data:
   raw_path: "data/imdb_reviews.tsv"
@@ -70,7 +70,7 @@ evaluation:
 
 mlflow:
   tracking_uri: "mlruns"
-  experiment_name: "imdb-sentiment"
+  experiment_name: "nlp-sentiment"
 
 api:
   host: "0.0.0.0"
