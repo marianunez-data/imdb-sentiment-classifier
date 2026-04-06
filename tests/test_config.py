@@ -12,7 +12,7 @@ def test_config_loads_successfully() -> None:
 def test_project_name() -> None:
     """Project name matches expected value."""
     config = get_config()
-    assert config.project.name == "imdb-sentiment-classifier"
+    assert config.project.name == "nlp-sentiment-intelligence"
 
 
 def test_all_sections_exist() -> None:
