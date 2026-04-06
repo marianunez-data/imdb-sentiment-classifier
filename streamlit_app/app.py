@@ -1,4 +1,4 @@
-"""Interactive Streamlit dashboard for IMDB Sentiment Classifier.
+"""Interactive Streamlit dashboard for NLP Sentiment Intelligence.
 
 Provides live prediction with SHAP explanations, model comparison arena,
 explainability deep-dive, and production drift monitoring.
@@ -31,7 +31,7 @@ FIGURES_DIR = PROJECT_ROOT / config.paths.reports_dir
 # ---------------------------------------------------------------------------
 st.set_page_config(
     layout="wide",
-    page_title="IMDB Sentiment Classifier",
+    page_title="NLP Sentiment Intelligence",
 )
 
 CUSTOM_CSS = """
@@ -279,7 +279,7 @@ def _render_highlighted_text(text: str, word_shap: dict[str, float]) -> str:
 # Sidebar
 # ---------------------------------------------------------------------------
 with st.sidebar:
-    st.markdown("#### IMDB Sentiment Classifier")
+    st.markdown("#### NLP Sentiment Intelligence")
 
     test_results = metrics.get("test_results") or {}
     champion_key = test_results.get("champion", "lr_tuned_calibrated")
