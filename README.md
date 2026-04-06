@@ -1,9 +1,9 @@
 # NLP Sentiment Intelligence System
 ![Tests](https://github.com/marianunez-data/imdb-sentiment-classifier/actions/workflows/tests.yml/badge.svg)
-[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://imdb-sentiment-mcgn.streamlit.app/)
+[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://nlp-sentiment-mcgn.streamlit.app/)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-**[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)** | **[Executive Report](https://marianunez-data.github.io/business_report.html)**
+**[Live Demo](https://nlp-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)** | **[Executive Report](https://marianunez-data.github.io/business_report.html)**
 
 
 **Production-grade NLP pipeline for binary sentiment classification** with calibrated confidence routing, MLflow experiment tracking, SHAP explainability, and Evidently AI drift monitoring. Systematic comparison of Logistic Regression, LightGBM, and DistilBERT+LoRA across 8 model variants, evaluated with bootstrap confidence intervals and McNemar statistical significance tests. The champion model (LR Tuned Calibrated, F1=0.8948) was selected for probability quality, enabling a three-tier routing system that auto-classifies high-confidence predictions and escalates uncertain cases to human reviewers.
