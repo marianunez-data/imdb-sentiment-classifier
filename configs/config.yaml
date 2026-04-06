@@ -1,5 +1,5 @@
 project:
-  name: "imdb-sentiment-classifier"
+  name: "nlp-sentiment-intelligence"
   version: "2.0.0"
   random_seed: 42
   description: "Production-grade binary sentiment classifier for IMDB movie reviews"
