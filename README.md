@@ -1,9 +1,9 @@
 # NLP Sentiment Intelligence System
-![Tests](https://github.com/marianunez-data/imdb-sentiment-classifier/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/marianunez-data/nlp-sentiment-intelligence/actions/workflows/tests.yml/badge.svg)
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://nlp-sentiment-mcgn.streamlit.app/)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-**[Live Demo](https://nlp-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)** | **[Executive Report](https://marianunez-data.github.io/business_report.html)**
+**[Live Demo](https://nlp-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-nlp-sentiment-classifier.hf.space/docs)** | **[Executive Report](https://marianunez-data.github.io/business_report.html)**
 
 
 **Production-grade NLP pipeline for binary sentiment classification** with calibrated confidence routing, MLflow experiment tracking, SHAP explainability, and Evidently AI drift monitoring. Systematic comparison of Logistic Regression, LightGBM, and DistilBERT+LoRA across 8 model variants, evaluated with bootstrap confidence intervals and McNemar statistical significance tests. The champion model (LR Tuned Calibrated, F1=0.8948) was selected for probability quality, enabling a three-tier routing system that auto-classifies high-confidence predictions and escalates uncertain cases to human reviewers.
@@ -67,7 +67,7 @@ flowchart TD
 ### FastAPI Endpoint
 ```bash
 # Live API (Hugging Face Spaces)
-curl -X POST https://marianunez-data-imdb-sentiment-classifier.hf.space/predict \
+curl -X POST https://marianunez-data-nlp-sentiment-classifier.hf.space/predict \
   -H "Content-Type: application/json" \
   -d '{"review": "This movie was absolutely amazing, best film ever"}'
 
@@ -124,8 +124,8 @@ mlflow ui --port 5000
 
 ### Setup
 ```bash
-git clone https://github.com/marianunez-data/imdb-sentiment-classifier.git
-cd imdb-sentiment-classifier
+git clone https://github.com/marianunez-data/nlp-sentiment-intelligence.git
+cd nlp-sentiment-intelligence
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -144,8 +144,8 @@ streamlit run streamlit_app/app.py --server.port 8501
 
 ### Run with Docker
 ```bash
-docker build -t imdb-sentiment .
-docker run -p 8000:8000 imdb-sentiment
+docker build -t nlp-sentiment .
+docker run -p 8000:8000 nlp-sentiment
 ```
 
 ### Run Tests
