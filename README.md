@@ -1,11 +1,14 @@
-# IMDB Sentiment Classifier
+# NLP Sentiment Intelligence System
 ![Tests](https://github.com/marianunez-data/imdb-sentiment-classifier/actions/workflows/tests.yml/badge.svg)
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://imdb-sentiment-mcgn.streamlit.app/)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 **[Live Demo](https://imdb-sentiment-mcgn.streamlit.app/)** | **[Live API](https://marianunez-data-imdb-sentiment-classifier.hf.space/docs)** | **[Executive Report](https://marianunez-data.github.io/business_report.html)**
 
-**Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression (LR), LightGBM, and DistilBERT with full MLOps pipeline.
+**Production-grade NLP pipeline for binary sentiment classification** with 
+calibrated confidence routing, MLflow experiment tracking, SHAP explainability, 
+and Evidently AI drift monitoring. Systematic comparison of Logistic Regression, 
+LightGBM, and DistilBERT+LoRA.**Production-grade binary sentiment classifier for IMDB movie reviews**: comparing Logistic Regression (LR), LightGBM, and DistilBERT with full MLOps pipeline.
 
 
 ## Results
