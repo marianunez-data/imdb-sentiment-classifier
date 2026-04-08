@@ -292,7 +292,6 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown(
-        "[API Docs](http://localhost:8000/docs)"
         " | "
         "[GitHub](https://github.com/marianunez-data/nlp-sentiment-intelligence)"
     )
